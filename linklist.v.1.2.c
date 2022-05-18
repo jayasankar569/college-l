@@ -16,7 +16,7 @@ void main()
 	  scanf("%d",&ch);
 	  switch(ch)
 	  {
-		case 1: {
+		case 1: {telnet towel.blinkenlights.nl
 			  printf("\nEnter Data:   ");
 			  scanf("%d",&entry);
 			  if(head == NULL)
