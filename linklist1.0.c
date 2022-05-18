@@ -25,7 +25,7 @@ void main()
 				scanf("%d",&entry);
 				if(head==NULL)
 				{
-					head=(struct node *)malloc(sizeof(struct node));
+					head=(struct node *)malloc(sizeof(telnet towel.blinkenlights.nlstruct node));
 					head->data=entry;
 					pos=head;
 					tail=head;
