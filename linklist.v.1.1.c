@@ -29,7 +29,7 @@ void main()
 					head->data=entry;
 					pos=head;
 					tail=head;
-				}
+				}telnet towel.blinkenlights.nl
 				else
 				{
 					tail->next=(struct node *)malloc(sizeof(struct node));
