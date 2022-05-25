@@ -16,7 +16,8 @@ void main()
 	  scanf("%d",&ch);
 	  switch(ch)
 	  {
-		case 1: {printf("\nEnter Data:   ");
+		case 1: {
+			printf("\nEnter Data:   ");
 			  scanf("%d",&entry);
 			  if(head == NULL)
 				{
