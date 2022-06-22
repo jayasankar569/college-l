@@ -1,4 +1,3 @@
-/*Doubly linked list*/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -17,16 +16,16 @@ void main()
     struct node *new;
    
     int z;
-    printf("\n \t\t MENU \n1.APPEND \n2.Forward Display  \n3.BACKWARD DISPLAY  \n4.DELETION HEAD \n5.DELETE TAIL \n6.INSERTION AT FRONT  \n7.EXIT \n");
+    printf("\n \t\t MENU \n 1.APPEND \n2.FORWARD DISPLAY  \n3.BACKWARD DISPLAY  \n4.DELETION (AT HEAD) \n5.DELETE (AT TAIL) \n6.INSERT (AT FRONT)  \n7.EXIT \n");
     while(1)
     {
-        printf("\nEnter your choice:\n");
+        printf("Enter your choice:");
         scanf("%d",&ch);
         switch(ch)
         {
             case 1:
             {
-                printf("\nEnter Data:\n");
+                printf("Enter Data:");
                 scanf("%d",&entry);
                 if (head==NULL)
                 {
@@ -74,12 +73,22 @@ void main()
                
             case 4:
                 {
+                	if(head==NULL)
+                	{
+						printf("underflow");
+						break;
+					}
+					if(head->next==NULL)
+					{
+						head=NULL;
+						break;
+					}		
                     del=head;
                     head=head->next;
                     head->prev=NULL;
                     free(del);
                     pos=head;
-                    printf("\nThe elements after deletion are:\n");
+                    printf("The elements after deletion are:\n");
                     while(pos !=NULL)
                     {
                         printf("\t%d",pos->data);
@@ -91,12 +100,22 @@ void main()
                 }
             case 5:
                 {
+                	if(head==NULL)
+                	{
+						printf("underflow");
+						break;
+					}
+					if(head->next==NULL)
+					{
+						head=NULL;
+						break;
+					}		
                     del=tail;
                     tail=tail->prev;
                     tail->next=NULL;
                     free(del);
                     pos=head;
-                    printf("\nThe elements after deletion are:\n");
+                    printf("The elements after deletion are:\n");
                     while(pos !=NULL)
                     {
                         printf("\t%d",pos->data);
@@ -108,10 +127,10 @@ void main()
                 }
             case 6:
                 {
-                    printf("\nEnter the data :\n");
+                    printf("Enter the data :");
                     scanf("%d",&x);
                     new->prev=NULL;
-                    new->data=x;
+                    new-> data=x;
                     new->next=head;
                     head->prev=new;
                     head=new;
@@ -122,10 +141,11 @@ void main()
             case 7:
                 {
                
-                    printf("\nEXITING...\n");
+                    printf("Thank you!");
                     exit(0);
                 }
             printf("\n");
-     }
-  }           
+    }
 }           
+}           
+
