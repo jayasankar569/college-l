@@ -1,9 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 #define n 5
-
 int top=-1;
 int stack[n];
+
 
 int isfull()
 {
@@ -12,6 +12,7 @@ int isfull()
 	else
 		return 0;
 }
+
 
 int isempty()
 {
@@ -24,43 +25,46 @@ int isempty()
 void push(int val)
 {
 	if(isfull())
-		printf("\nOverflow\n");
+		printf("\nOverflow");
 	else
 	{
 		top++;
 		stack[top]=val;
-		printf("\n%d pushed\n",stack[top]);
+		printf("\n%d pushed",stack[top]);
 	}
 }
+
 
 void pop()
 {
 	if(isempty())
-		printf("\nUnderflow\n");
+		printf("\nUnderflow");
 	else
 	{
-		printf("\n%d popped\n",stack[top]);
+		printf("\n%d popped",stack[top]);
 		stack[top]=-1;
 		top--;
 	}
 }
 
+
 void display()
 {
 	if(isempty())
-		printf("\nEmpty Stack\n");
+		printf("\nEmpty Stack");
 	else
 	{	
-		printf("\nElements are: \n");
+		printf("\nElements are: ");
 		for(int i=top;i>=0;i--)
 			printf("\n|%d| ",stack[i]);
-		printf("\n```");
+		printf("\n");
 	}
 }
 
+
 void findtop()
 {
-	printf("\ntop position=%d\ntop value=%d\n",top,stack[top]);
+	printf("\ntop position=%d\ntop value=%d",top,stack[top]);
 }
 
 void main()
@@ -69,13 +73,14 @@ void main()
 	
 	while(1)
 	{
-		printf("\n1:PUSH\n2:POP\n3:DISPLAY\n4:Is Stack Empty\n5:Is Stack Full\n6:Find top\n7:Exit\n\nEnter your choice: \n");
+		
+		printf("\n\n1:PUSH\n2:POP\n3:DISPLAY\n4:Is Stack Empty\n5:Is Stack Full\n6:Find top\n7:Exit\nEnter your choice: ");
 		scanf("%d",&ch);
 		switch(ch)
 		{
 			case 1:
 			{
-				printf("Enter data:\n");
+				printf("Enter data");
 				scanf("%d",&entry);
 				push(entry);
 				break;
@@ -96,18 +101,18 @@ void main()
 			case 4:
 			{
 				if(isempty())
-					printf("\nStack is Empty\n");
+					printf("\nStack is Empty");
 				else
-					printf("\nStack is not Empty \n");
+					printf("\nStack is not Empty ");
 				break;
 			}
 			
 			case 5:
 			{
 				if(isfull())
-					printf("\nStack is Full\n");
+					printf("\nStack is Full");
 				else
-					printf("\nStack is not Full\n ");
+					printf("\nStack is not Full ");
 				break;
 			}
 			
@@ -119,15 +124,14 @@ void main()
 			
 			case 7:
 			{
-				printf("\nTHANK YOU\nEXITING...\n");
+				printf("Exiting...");
 				exit(0);
 			}
 			
 			default:
 			{
-				printf("Invalid choice\n");
+				printf("Invalid choice");
 			}
 		}
 	}
 }
-			
