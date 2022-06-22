@@ -1,150 +1,188 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 
 void main()
 {
-    int i;
-    int x;
-    struct node
-    {
-        struct node *prev;
-        int data;
-        struct node *next;
-    };
-    int ch,entry;
-    struct node *head=NULL,*pos=NULL,*tail=NULL,*del=NULL,*temp=NULL,*ptr=NULL;
-    struct node *new;
-   
-    int z;
-    printf("\n \t\t MENU \n 1.APPEND \n2.FORWARD DISPLAY  \n3.BACKWARD DISPLAY  \n4.DELETION (AT HEAD) \n5.DELETE (AT TAIL) \n6.INSERT (AT FRONT)  \n7.EXIT \n");
-    while(1)
-    {
-        printf("Enter your choice:");
-        scanf("%d",&ch);
-        switch(ch)
-        {
-            case 1:
-            {
-                printf("Enter Data:");
-                scanf("%d",&entry);
-                if (head==NULL)
-                {
-                    head=(struct node *)malloc(sizeof(struct node));
-                    head->prev=NULL;
-                    head->data=entry;
-                    head->next=NULL;
-                    pos=head;
-                    tail=head;
-                }
-                else
-                {
-                    tail->next=(struct node *)malloc(sizeof(struct node));
-                    tail->next->prev=tail;
-                    tail->next->data=entry;
-                    tail->next->next=NULL;
-                    tail=tail->next;
-                }
-                break;
-            }
-            case 2:
-                {
-                    pos=head;
-                    printf("\nElements are:");
-                    while(pos !=NULL)
-                    {
-                        printf("\t%d",pos->data);
-                        pos=pos->next;
-                    }
-                    printf("\n");
-                    break;
-                }
-            case 3:
-                {
-                    pos=tail;
-                    printf("\nElements are:");
-                    while(pos !=NULL)
-                    {
-                        printf("\t%d",pos->data);
-                        pos=pos->prev;
-                    }
-                    printf("\n");
-                    break;
-                }
-               
-            case 4:
-                {
-                	if(head==NULL)
-                	{
-						printf("underflow");
-						break;
-					}
-					if(head->next==NULL)
+	struct node
+	{
+		struct node *prev;
+		int data;
+		struct node *next;
+	};
+	struct node *head=NULL,*pos=NULL,*tail=NULL,*temp=NULL;
+	
+	int ch,entry,count=0,find,i;
+	while(1)
+	{
+		printf("\n1:Insert (At front)\n2:Insert (At end)\n3:Delete(Head)\n4:Delete(In between)\n5:Delete(tail)\n6:Display forward\n7:Display reverse\n8:Exit");
+		printf("\nEnter your choice: ");
+		scanf("%d",&ch);
+		
+		switch(ch)
+		{
+			case 1:
+			{
+				printf("Enter data: ");
+				scanf("%d",&entry);
+				if(head==NULL)
+				{
+					head=(struct node*)malloc(sizeof(struct node));
+					head->prev=NULL;
+					head->data=entry;
+					head->next=NULL;
+					pos=head;
+					tail=head;
+				}
+				
+				else
+				{
+					temp=(struct node*)malloc(sizeof(struct node));
+					temp->prev=NULL;
+					temp->data=entry;
+					temp->next=head;
+					head=temp;
+					head->next->prev=head;
+				}
+				break;
+			}
+			
+			
+			case 2:
+			{
+				printf("Enter data: ");
+				scanf("%d",&entry);
+				if(head==NULL)
+				{
+					head=(struct node*)malloc(sizeof(struct node));
+					head->prev=NULL;
+					head->data=entry;
+					head->next=NULL;
+					pos=head;
+					tail=head;
+				}
+				
+				else
+				{
+					tail->next=(struct node*)malloc(sizeof(struct node));
+					tail->next->prev=tail;
+					tail->next->data=entry;
+					tail->next->next=NULL;
+					tail=tail->next;
+				}
+				break;
+			}
+			
+			case 3:
+			{
+				if(head==NULL)
+				{
+					printf("Underflow");
+					break;
+				}
+				
+				if(head->next==NULL)
+				{
+					printf("Last element to be deleted is: %d",head->data);
+					head=NULL;
+					break;
+				}
+				
+				struct node *del=head;
+				head=head->next;
+				del->next=NULL;
+				head->prev=NULL;
+				free(del);
+				break;
+			}
+			
+			case 4:
+			{
+				struct node *temp=head;
+				printf("Enter position of data: ");
+				scanf("%d",&entry);
+				for(i=0;i<entry-1;i++)
 					{
-						head=NULL;
-						break;
-					}		
-                    del=head;
-                    head=head->next;
-                    head->prev=NULL;
-                    free(del);
-                    pos=head;
-                    printf("The elements after deletion are:\n");
-                    while(pos !=NULL)
-                    {
-                        printf("\t%d",pos->data);
-                        pos=pos->next;
-                    }
-                    printf("\n");
-                    break;
-                   
-                }
-            case 5:
-                {
-                	if(head==NULL)
-                	{
-						printf("underflow");
-						break;
+						temp=temp->next;
 					}
-					if(head->next==NULL)
+					
+				struct node *del=temp->next;
+				temp->next=temp->next->next;
+				temp->next->prev=temp;
+				del->prev=NULL;
+				del->next=NULL;
+				free(del);
+				break;
+			}
+			
+			case 5:
+			{
+				if(head==NULL)
+				{
+					printf("Underflow");
+					break;
+				}
+				
+				if(head->next==NULL)
+				{
+					printf("Last element to be deleted is: %d",head->data);
+					head=NULL;
+					break;
+				}
+				
+				struct node *del=tail;
+				tail=tail->prev;
+				del->prev=NULL;
+				tail->next=NULL;
+				free(del);
+				break;
+			}
+			
+			case 6:
+			{
+				pos=head;
+				if(pos==NULL)
+				{
+					printf("Nothing to print");
+				}
+				else
+				{
+					printf("\nElements are: ");
+					while(pos!=NULL)
 					{
-						head=NULL;
-						break;
-					}		
-                    del=tail;
-                    tail=tail->prev;
-                    tail->next=NULL;
-                    free(del);
-                    pos=head;
-                    printf("The elements after deletion are:\n");
-                    while(pos !=NULL)
-                    {
-                        printf("\t%d",pos->data);
-                        pos=pos->next;
-                    }
-                    printf("\n");
-                    break;   
-                           
-                }
-            case 6:
-                {
-                    printf("Enter the data :");
-                    scanf("%d",&x);
-                    new->prev=NULL;
-                    new-> data=x;
-                    new->next=head;
-                    head->prev=new;
-                    head=new;
-                }
-                printf("\n");
-                break;
-               
-            case 7:
-                {
-               
-                    printf("Thank you!");
-                    exit(0);
-                }
-            printf("\n");
-    }
-}           
-}           
+						printf("%d ",pos->data);
+						pos=pos->next;
+					}
+				}
+				printf("\n");
+				break;
+			}
+			
+			case 7:
+			{
+				pos=tail;
+				printf("\nElements are: ");
+				while(pos!=NULL)
+				{
+					printf("%d ",pos->data);
+					pos=pos->prev;
+				}
+				printf("\n");
+				break;
+			}
+			
+			case 8:
+			{
+				printf("Successfully exited program\n");
+				exit(0);
+			}
+			
+			default:
+			{
+				printf("Wrong input\n");
+			}
+		}
+	}
+}
+				
+				
+					
