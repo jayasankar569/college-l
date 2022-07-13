@@ -1,107 +1,98 @@
-/* Queue using Array with enqueue, dequeue, display, and more */
-#include <stdio.h>
-#include <stdlib.h>
-#define size 5
-int rear=-1;
-int front=-1;
-int queue[size];
-int isfull()
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node {
+		int data;
+		struct node *next;
+	    }; 
+		struct node *front=NULL; struct node *rear=NULL;
+
+void enqueue(int value)
 {
-	if(rear==size-1)
-		return 1;
-	else
-		return 0;
+   struct node *input;
+   input=(struct node*)malloc(sizeof(struct node));
+   input->data=value;
+   input->next=NULL;
+   if(front==NULL)
+      front=rear=input;
+   else
+   {
+      rear->next=input;
+      rear=input;
+   }
+   printf("Inserted element is %d\n",input->data);
 }
-int isempty()
-{
-	if(front==-1)
-		return 1;
-	else
-		return 0;
-}
-void enqueue(int val)
-{
-	if(isfull())
-	{
-		printf("\nQueue Full");
-	}
-	else
-	{
-		if(front==-1)
-		{
-		front=0;
-		}
-		rear++;
-		queue[rear]=val;
-		printf("\n%d Enqueued",queue[rear]);
-	}
-}
+
 void dequeue()
 {
-	if(isempty())
-		printf("Queue Empty");
-	else
-	{
-		printf("\n%d Dequeued",queue[front]);
-		front++;
-		if(front>rear)
-		{	
-			front=-1;
-			rear=-1;
-		}
-	}
+   if(front==NULL)
+		printf("Queue is empty\n");
+   else
+   {
+      struct node *del=front;
+      front=front->next;
+      printf("Deleted element is %d\n",del->data);
+      free(del);
+   }
 }
+
 void display()
 {
-	int i,x;
-	x=front;
-	for(i=x;i<=rear;i++)
-		printf("\n%d",queue[i]);
+  if(front==NULL)
+		printf("Queue is empty\n");
+   else
+   {
+      struct node *temp=front;
+      while(temp->next!=NULL)
+      {
+	 	printf("|___%d___",temp->data);
+	 	temp=temp->next;
+      }
+      printf("|___%d___|\n",temp->data);
+   }
 }
+
 void main()
 {
-	int ch,entry;
 	while(1)
 	{
-		printf("\n\n1. Enqueue\n2. Dequeue\n3. Display\n4. Empty or Full?\n5. Exit\n\nEnter Your Choice: ");
+		int queue,ch,entry,i;
+		printf("\n1.Enqueue\t\t2. Dequeue\t\t3. Display\t\t4.Exit\t");
+		printf("\nEnter your choice: ");
 		scanf("%d",&ch);
 		switch(ch)
-		{
+		{	
 			case 1:
 			{
-				printf("\nEnter Value to Insert: ");
+				printf("Enter element: ");
 				scanf("%d",&entry);
 				enqueue(entry);
 				break;
 			}
+					
 			case 2:
 			{
 				dequeue();
 				break;
 			}
+			
 			case 3:
 			{
 				display();
 				break;
 			}
+	
 			case 4:
 			{
-				if(isfull())
-					printf("\nStack is Full");
-				else if(isempty())
-					printf("\nStack is Empty");
-				else
-					printf("\nStack is Neither Full nor Empty");
-				break;
-			}
-			case 5:
-			{
-				printf("\nGoodbye\n");
+				printf("Succesfully exiting program \n");
 				exit(0);
 			}
+			
 			default:
 			{
-				printf("\nInvalid Choice");
+				printf("\nError,wrong choice input");
+				printf("\n");
+				break;
 			}
 		}
 	}
